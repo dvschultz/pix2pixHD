@@ -58,7 +58,9 @@ elif opt.start_from  == "video":
 else:
     # use specified image
     filepath = opt.start_from
+    print(fileepath)
     if os.path.isfile(filepath):
+        print('oops')
         t = video_utils.im2tensor(Image.open(filepath))
         for i in range(50):
             video_utils.save_tensor(
