@@ -58,9 +58,9 @@ elif opt.start_from  == "video":
 else:
     # use specified image
     filepath = opt.start_from
-    print(fileepath)
+    print(filepath)
     if os.path.isfile(filepath):
-        print('oops')
+        print('so far so good')
         t = video_utils.im2tensor(Image.open(filepath))
         for i in range(50):
             video_utils.save_tensor(
@@ -68,6 +68,8 @@ else:
                 frame_dir + "/frame-%s.jpg" % str(frame_index).zfill(5),
             )
             frame_index += 1
+    else:
+        print('oops, not a file using filepath')
 
 current_frame = t
 
