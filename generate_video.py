@@ -59,7 +59,7 @@ else:
     # use specified image
     filepath = opt.start_from
     print(filepath)
-    options_text += filepath.split('/')[-1]
+    options_text += ("_" + filepath.split('/')[-1])
     if os.path.isfile(filepath):
         print('so far so good')
         t = video_utils.im2tensor(Image.open(filepath))
