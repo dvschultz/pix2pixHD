@@ -75,9 +75,8 @@ else:
 current_frame = t
 
 duration_s = opt.how_many / opt.fps
-options_text += ("_with-%d-zoom" % opt.zoom_lvl)
 if (opt.zoom_lvl!=0):
-    
+   options_text += ("_with-%d-zoom" % opt.zoom_lvl) 
 video_id = "epoch-%s_%s_%.1f-s_%.1f-fps%s" % (
     str(opt.which_epoch),
     opt.name,
