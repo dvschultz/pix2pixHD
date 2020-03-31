@@ -63,7 +63,7 @@ else:
     if os.path.isfile(filepath):
         print('so far so good')
         t = video_utils.im2tensor(Image.open(filepath))
-        for i in range(50):
+        for i in range(1):
             video_utils.save_tensor(
                 t,
                 frame_dir + "/frame-%s.jpg" % str(frame_index).zfill(5),
