@@ -40,7 +40,7 @@ if os.path.isdir(frame_dir):
 os.mkdir(frame_dir)
 
 frame_index = 1
-
+options_text = ""
 if opt.start_from == "noise":
     # careful, default value is 1024x512
     t = torch.rand(1, 3, opt.fineSize, opt.loadSize)
@@ -59,6 +59,7 @@ else:
     # use specified image
     filepath = opt.start_from
     print(filepath)
+    options_text += filepath.split('/')[-1]
     if os.path.isfile(filepath):
         print('so far so good')
         t = video_utils.im2tensor(Image.open(filepath))
@@ -74,12 +75,15 @@ else:
 current_frame = t
 
 duration_s = opt.how_many / opt.fps
+options_text += ("_with-%d-zoom" % opt.zoom_lvl)
+if (opt.zoom_lvl!=0):
+    
 video_id = "epoch-%s_%s_%.1f-s_%.1f-fps%s" % (
     str(opt.which_epoch),
     opt.name,
     duration_s,
     opt.fps,
-    "_with-%d-zoom" % opt.zoom_lvl if opt.zoom_lvl!=0 else ""
+    options_text
 )
 
 model = create_model(opt)
