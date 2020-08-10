@@ -75,7 +75,7 @@ def extract_frames_from_video(video_path, frame_dir, output_shape=(1280, 736), f
         height,
         width,
         height,
-        frame_dir
+        frame_dir.replace(" ", "\\ ")
     )
     print(command)
     print("extracting the frames")
