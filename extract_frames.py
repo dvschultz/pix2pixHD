@@ -12,6 +12,7 @@ parser.add_argument('-name', '--dataset-name', dest="dataset_name", help='datase
 parser.add_argument('-p2pdir', '--pix2pix-dir', dest="pix2pix_dir", help='pix2pix directory', required=True)
 parser.add_argument('-width', '--width', help='output width', default=1280, type=int)
 parser.add_argument('-height', '--height', help='output height', default=736, type=int)
+parser.add_argument('-fps', '--fps', help='fps', default=None, type=int)
 args = parser.parse_args()
 
 if not os.path.isfile(args.input_video):
@@ -32,7 +33,8 @@ os.mkdir(dataset_dir + "/test_frames")
 video_utils.extract_frames_from_video(
 	os.path.realpath(args.input_video),
 	dataset_dir + "/train_frames",
-	output_shape=(args.width, args.height)
+	output_shape=(args.width, args.height),
+	fps=args.fps
 )
 
 # copy first few frames to, for example, start the generated videos
