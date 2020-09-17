@@ -103,7 +103,7 @@ for i in tqdm(range(opt.how_many)):
 
     video_utils.save_tensor(
         next_frame, 
-        frame_dir + "/frame-%s.jpg" % str(frame_index).zfill(5),
+        frame_dir + "/frame-%s.%s" % (str(frame_index).zfill(5), ext),
     )
     current_frame = next_frame
     frame_index+=1
