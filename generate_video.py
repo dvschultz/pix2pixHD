@@ -39,6 +39,11 @@ if os.path.isdir(frame_dir):
     shutil.rmtree(frame_dir)
 os.mkdir(frame_dir)
 
+if opt.png:
+    ext = 'png'
+else:
+    ext = 'jpg'
+
 frame_index = 1
 options_text = ""
 if opt.start_from == "noise":
@@ -51,7 +56,7 @@ elif opt.start_from  == "video":
         t = data['left_frame']
         video_utils.save_tensor(
             t,
-            frame_dir + "/frame-%s.jpg" % str(frame_index).zfill(5),
+            frame_dir + "/frame-%s.%s" % (str(frame_index).zfill(5), ext),
             text="original video",
         )
         frame_index += 1
@@ -66,7 +71,7 @@ else:
         for i in range(1):
             video_utils.save_tensor(
                 t,
-                frame_dir + "/frame-%s.jpg" % str(frame_index).zfill(5),
+                frame_dir + "/frame-%s.%s" % (str(frame_index).zfill(5), ext),
             )
             frame_index += 1
     else:
