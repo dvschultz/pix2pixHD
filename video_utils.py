@@ -61,25 +61,32 @@ def next_frame_prediction(generator, input_tensor):
     output_tensor = generator.inference(input_tensor, None, None)
     return output_tensor
 
-def extract_frames_from_video(video_path, frame_dir, output_shape=(1280, 736),fps=None, ffmpeg_verbosity=16):
+def extract_frames_from_video(video_path, frame_dir, output_shape=(1280, 736),fps=None, ffmpeg_verbosity=16,png=False):
     """Extract all frames from a video
       - scale down the frames to match the desired height
       - crop to the desired width
     ex: 1920x1080 --> 1308x736 --> 1280x736
     """
+
+    if opt.png:
+        ext = 'png'
+    else:
+        ext = 'jpg'
+
     width, height = output_shape
     if(fps is None):
-        command = """ffmpeg -v %d -i %s -q:v 2 -vf "scale=iw*%d/ih:%d, crop=%d:%d" %s/frame-%%06d.jpg -hide_banner""" % (
+        command = """ffmpeg -v %d -i %s -q:v 2 -vf "scale=iw*%d/ih:%d, crop=%d:%d" %s/frame-%%06d.%s -hide_banner""" % (
             ffmpeg_verbosity,
             video_path,
             height,
             height,
             width,
             height,
-            frame_dir.replace(" ", "\\ ")
+            frame_dir.replace(" ", "\\ "),
+            ext
         )
     else:
-        command = """ffmpeg -v %d -i %s -r %d -q:v 2 -vf "scale=iw*%d/ih:%d, crop=%d:%d" %s/frame-%%06d.jpg -hide_banner""" % (
+        command = """ffmpeg -v %d -i %s -r %d -q:v 2 -vf "scale=iw*%d/ih:%d, crop=%d:%d" %s/frame-%%06d.%s -hide_banner""" % (
             ffmpeg_verbosity,
             video_path,
             fps,
@@ -87,7 +94,8 @@ def extract_frames_from_video(video_path, frame_dir, output_shape=(1280, 736),fp
             height,
             width,
             height,
-            frame_dir.replace(" ", "\\ ")
+            frame_dir.replace(" ", "\\ "),
+            ext
         )
     print(command)
     print("extracting the frames")

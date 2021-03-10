@@ -129,7 +129,8 @@ video_utils.video_from_frame_directory(
     video_path, 
     framerate=opt.fps, 
     crop_to_720p=opt.no_crop,
-    reverse=False
+    reverse=False,
+    png=opt.png
 )
 
 print("video ready:\n%s" % video_path)
