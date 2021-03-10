@@ -41,6 +41,9 @@ class BaseOptions():
         self.parser.add_argument('--heat_seeking_lvl', default=0, type=int, help='amount of camera work to follow the action')
         self.parser.add_argument('--pstart', default=1, type=int, help='starting epoch for progress videos')
         self.parser.add_argument('--pstop', default=1, type=int, help='stopping epoch for progress videos')
+        self.parser.add_argument('--zoom_cres', action='store_true', default=False, help='slowly increase zoom')
+        self.parser.add_argument('--zoom_inc', type=int, default=24, help='how often to increment the zoom')
+
 
         # for setting inputs
         self.parser.add_argument('--dataroot', type=str, default='./datasets/cityscapes/') 

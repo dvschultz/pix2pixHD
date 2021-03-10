@@ -82,6 +82,11 @@ current_frame = t
 duration_s = opt.how_many / opt.fps
 if (opt.zoom_lvl!=0):
    options_text += ("_with-%d-zoom" % opt.zoom_lvl) 
+
+if(opt.zoom_cres):
+    zoom_amt = 0
+    options_text += ("_zoom-cres-%d" % opt.zoom_inc)
+
 video_id = "epoch-%s_%s_%.1f-s_%.1f-fps%s" % (
     str(opt.which_epoch),
     opt.name,
@@ -97,6 +102,13 @@ for i in tqdm(range(opt.how_many)):
 
     if opt.zoom_lvl != 0:
         next_frame = image_transforms.zoom_in(next_frame, zoom_level=opt.zoom_lvl)
+
+    if(opt.zoom_cres):
+        if(i % opt.zoom_inc == 0):
+            zoom_amt += 1
+
+        next_frame = image_transforms.zoom_in(next_frame, zoom_level=zoom_amt)
+
 
     if opt.heat_seeking_lvl != 0:
         next_frame = image_transforms.heat_seeking(next_frame, translation_level=opt.heat_seeking_lvl, zoom_level=opt.heat_seeking_lvl)
