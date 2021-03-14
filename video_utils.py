@@ -68,7 +68,7 @@ def extract_frames_from_video(video_path, frame_dir, output_shape=(1280, 736),fp
     ex: 1920x1080 --> 1308x736 --> 1280x736
     """
 
-    if opt.png:
+    if png:
         ext = 'png'
     else:
         ext = 'jpg'
