@@ -64,11 +64,23 @@ else:
     # use specified image
     filepath = opt.start_from
     options_text += ("_" + filepath.split('/')[-1])
-    print(filepath)
+    
     if os.path.isfile(filepath):
-        print('so far so good')
         t = video_utils.im2tensor(Image.open(filepath))
-        for i in range(1):
+        
+        if(opt.start_frames_before > 0):
+            split = filepath.split('-')
+            frame_no = split[-1]
+            frame_n = int(frame_no.split('.')[0])
+        
+        for i in range(opt.start_frames_before):
+            
+            if(opt.start_frames_before > 0):
+                f = frame_n - (opt.start_frames_before-i)
+                f = str(f).zfill(6)+'.jpg'
+                fpath = filepath.replace((frame_no),f)
+                t = video_utils.im2tensor(Image.open(fpath))
+
             video_utils.save_tensor(
                 t,
                 frame_dir + "/frame-%s.%s" % (str(frame_index).zfill(5), ext),
